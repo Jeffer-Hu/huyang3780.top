@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:title" content="Jeffery Hu | 近期更新">
+    <meta property="og:description" content="Jeffery Hu的最新动态与更新">
+    <meta property="og:url" content="https://huyang3780.top/updates.html">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="pic/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="pic/icon.ico" type="image/x-icon">
+    
+    <title id="page-title" data-cn="Jeffery Hu | 近期更新" data-en="Jeffery Hu | Recent Updates" data-jp="Jeffery Hu | 最近の更新"></title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#EC4899',
+                        wechat: '#07C160',
+                        weibo: '#E6162D',
+                        zhihu: '#0F88EB',
+                        qq: '#12B7F5',
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                        softBlue: '#E1F5FE',
+                        softGreen: '#E8F5E9',
+                        softBeige: '#F5F5DC',
+                        softPink: '#FFEBEE',
+                        softGray: '#F5F7FA',
+                        softLavender: '#F3E5F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+        
+        // 所有子域名和主域名统一设置为主域名，以同步语言设置
+        document.domain = 'huyang3780.top';
+    </script>
+    
+    <link rel="stylesheet" href="src/css.css">
+</head>
+<body class="index-bg-pattern text-dark overflow-x-hidden geometric-shapes">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm" id="navbar">
+        <div class="nav-decoration"></div>
+        
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="https://huyang3780.top" class="text-2xl font-bold flex items-center group mr-6">
+                    <span class="mr-2 text-primary group-hover:rotate-12 transition-transform duration-300"><i class="fa fa-connectdevelop"></i></span>
+                    <span>Jeffery Hu</span>
+                </a>
+                
+                <div class="hidden md:block">
+                    <select id="language-selector" class="bg-white border border-gray-300 text-dark rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+				<a href="https://huyang3780.top" class="link-underline text-primary" 
+				   data-cn="主站首页" data-en="Main Site Home" data-jp="メインサイトホーム">
+				   <i class="fa fa-home mr-1"></i>
+				</a>
+                <a href="https://huyang3780.top#about" class="link-underline" data-cn="关于我" data-en="About Me" data-jp="自分について">关于我</a>
+                <a href="https://huyang3780.top#explore" class="link-underline" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る">探索内容</a>
+                <a href="https://huyang3780.top#updates" class="link-underline" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報">最新动态</a>
+                <a href="https://huyang3780.top#contact" class="link-underline" data-cn="联系我" data-en="Contact Me" data-jp="連絡先">联系我</a>
+            </nav>
+        </div>
+        
+        <div class="md:hidden bg-white shadow-2xl absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none" id="mobile-menu">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <div class="mb-1">
+                    <select id="mobile-language-selector" class="w-full bg-white border border-gray-300 text-dark rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+                <a href="https://huyang3780.top#about" class="text-lg py-2 border-b border-gray-100" data-cn="关于我" data-en="About Me" data-jp="自分について"></a>
+                <a href="https://huyang3780.top#explore" class="text-lg py-2 border-b border-gray-100" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る"></a>
+                <a href="updates.html" class="text-lg py-2 border-b border-gray-100 text-primary" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報"></a>
+                <a href="https://huyang3780.top#contact" class="text-lg py-2 border-b border-gray-100" data-cn="联系我" data-en="Contact Me" data-jp="連絡先"></a>
+            </div>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-20 relative overflow-hidden section-fade">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4"
+                    data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報">
+                </span>
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-6"
+                    data-cn="近期更新" data-en="Recent Updates" data-jp="最近の更新">
+                </h2>
+                <p class="text-gray-600 text-lg"
+                    data-cn="了解最新的内容更新和活动信息，按时间顺序排列"
+                    data-en="Learn about the latest content updates and event information, sorted chronologically"
+                    data-jp="最新のコンテンツ更新とイベント情報を時間順にご覧ください">
+                </p>
+            </div>
+            
+            <!-- 时间线容器 -->
+            <div class="max-w-4xl mx-auto">
+                <!-- 时间线 -->
+                <div class="relative">
+                    <!-- 时间线中轴线 - 左对齐 -->
+                    <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary/20"></div>
+                    
+                    <!-- 更新条目4 - 最新 -->
+                    
+                    
+                    <!-- 更新条目3 -->
+                    <div class="relative pl-8 mb-12 timeline-item">
+                        <div class="flex items-start">
+                            <div class="absolute left-0 w-4 h-4 rounded-full bg-secondary transform -translate-x-1/2 z-10"></div>
+                            
+                            <div class="flex flex-col md:flex-row w-full gap-6">
+                                <div class="md:w-1/4 flex-shrink-0">
+                                    <span class="inline-block px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-medium">
+                                        <i class="fa fa-calendar-o mr-1"></i>
+                                        <span data-cn="2025年8月" data-en="August 2025" data-jp="2025年8月"></span>
+                                    </span>
+                                </div>
+                                
+                                <div class="md:w-3/4 w-full">
+                                    <div class="text-box-softGreen rounded-xl p-6 shadow-sm hover:shadow-md transition-all card-hover">
+                                        <div class="flex items-start gap-4">
+                                            <div class="update-icon bg-secondary/10 text-secondary flex-shrink-0">
+                                                <i class="fa fa-file-text-o text-2xl"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-xl font-semibold mb-3"
+                                                    data-cn="新的网页UI上线"
+                                                    data-en="The new web UI has been launched"
+                                                    data-jp="新しいUIが登場しました">
+                                                </h3>
+                                                <p class="text-gray-600 mb-4"
+                                                    data-cn="将网站全面升级，停用了v1.5.0的个人网页，全新的v2.0.0网页已启用，增加了模块化分站与多语言选择框，适配中英日3国语言。"
+                                                    data-en="The website has been comprehensively upgraded. The personal web page of v1.5.0 has been discontinued, and the brand-new v2.0.0 web page has been activated. Modular sub-sites and multi-language selection boxes have been added, and it is compatible with Chinese, English and Japanese."
+                                                    data-jp="サイトを全面的にアップグレードしました。v1.5.0の箇人ページを停止しました。新しいv2.0.0のページが有効になりました。モジュール化されたサブサイトと多言語選択ボックスを追加しました。">
+                                                </p>
+                                                <a href="https://blog.huyang3780.top/personal.html#updateUI01" class="text-secondary font-medium hover:underline flex items-center inline-flex"
+                                                    data-cn="查看详情 <i class='fa fa-angle-right ml-1'></i>"
+                                                    data-en="View details <i class='fa fa-angle-right ml-1'></i>"
+                                                    data-jp="詳細を見る <i class='fa fa-angle-right ml-1'></i>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+					<!-- 更新条目2 -->
+                    <div class="relative pl-8 mb-12 timeline-item">
+                        <div class="flex items-start">
+                            <div class="absolute left-0 w-4 h-4 rounded-full bg-primary transform -translate-x-1/2 z-10"></div>
+                            
+                            <div class="flex flex-col md:flex-row w-full gap-6">
+                                <div class="md:w-1/4 flex-shrink-0">
+                                    <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                                        <i class="fa fa-calendar-o mr-1"></i>
+                                        <span data-cn="2025年7月" data-en="July 2025" data-jp="2025年7月"></span>
+                                    </span>
+                                </div>
+                                
+                                <div class="md:w-3/4 w-full">
+                                    <div class="text-box-softBlue rounded-xl p-6 shadow-sm hover:shadow-md transition-all card-hover">
+                                        <div class="flex items-start gap-4">
+                                            <div class="update-icon bg-primary/10 text-primary flex-shrink-0">
+                                                <i class="fa fa-code text-2xl"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-xl font-semibold mb-3"
+                                                    data-cn="个人网站更新"
+                                                    data-en="Personal website update"
+                                                    data-jp="個人サイトの更新">
+                                                </h3>
+                                                <p class="text-gray-600 mb-4"
+                                                    data-cn="完成了v1.5.0的完善与上线。这些完善包括网页UI的更新，本地CSS与JS的预加载，交互式界面的优化等。"
+                                                    data-en="The improvement and launch of v1.5.0 have been completed. These improvements include the update of the web page UI, the preloading of local CSS and JS, and the optimization of the interactive interface, etc."
+                                                    data-jp="v1.5.0の改善とオンラインを完成しました。これらの改善には、web UIの更新、ネイティブCSSとJSのプリローディング、インタラクティブインタフェースの最適化などが含まれています。">
+                                                </p>
+                                                <a href="https://blog.huyang3780.top/personal.html#update001" class="text-primary font-medium hover:underline flex items-center inline-flex"
+                                                    data-cn="查看详情 <i class='fa fa-angle-right ml-1'></i>"
+                                                    data-en="View details <i class='fa fa-angle-right ml-1'></i>"
+                                                    data-jp="詳細を見る <i class='fa fa-angle-right ml-1'></i>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+                    <!-- 更新条目1 -->
+                    <div class="relative pl-8 mb-12 timeline-item">
+                        <div class="flex items-start">
+                            <div class="absolute left-0 w-4 h-4 rounded-full bg-accent transform -translate-x-1/2 z-10"></div>
+                            
+                            <div class="flex flex-col md:flex-row w-full gap-6">
+                                <div class="md:w-1/4 flex-shrink-0">
+                                    <span class="inline-block px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
+                                        <i class="fa fa-calendar-o mr-1"></i>
+                                        <span data-cn="2025年7月" data-en="July 2025" data-jp="2025年7月"></span>
+                                    </span>
+                                </div>
+                                
+                                <div class="md:w-3/4 w-full">
+                                    <div class="text-box-softBeige rounded-xl p-6 shadow-sm hover:shadow-md transition-all card-hover">
+                                        <div class="flex items-start gap-4">
+                                            <div class="update-icon bg-accent/10 text-accent flex-shrink-0">
+                                                <i class="fa fa-book text-2xl"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-xl font-semibold mb-3"
+                                                    data-cn="推荐书单更新"
+                                                    data-en="Recommended book list updated"
+                                                    data-jp="推奨図書リストが更新されました">
+                                                </h3>
+                                                <p class="text-gray-600 mb-4"
+                                                    data-cn="新增几本专业相关书籍推荐，包含详细阅读笔记和心得。这些书籍涵盖了计算机科学、设计思维和个人成长等多个领域，每本都附有详细的阅读建议。"
+                                                    data-en="Added some new professional book recommendations, including detailed reading notes and insights. These books cover multiple fields such as computer science, design thinking and personal growth, each with detailed reading suggestions."
+                                                    data-jp="詳細な読書ノートと心得を含む、専門関連の新しい何冊かの書籍推奨が追加されました。これらの書籍はコンピュータサイエンス、デザイン思考、個人成長など複数の分野をカバーしており、それぞれ詳細な読書提案が付属しています。">
+                                                </p>
+                                                <a href="https://blog.huyang3780.top/personal.html#reading001" class="text-accent font-medium hover:underline flex items-center inline-flex"
+                                                    data-cn="查看书单 <i class='fa fa-angle-right ml-1'></i>"
+                                                    data-en="View book list <i class='fa fa-angle-right ml-1'></i>"
+                                                    data-jp="書籍リストを見る <i class='fa fa-angle-right ml-1'></i>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="https://huyang3780.top" class="text-2xl font-bold flex items-center">
+                        <span class="mr-2 text-primary"><i class="fa fa-connectdevelop"></i></span>
+                        <span>Jeffery Hu</span>
+                    </a>
+                    <p class="text-gray-400 mt-2"
+                        data-cn="我的数字家园，连接你我"
+                        data-en="My digital home, connecting you and me"
+                        data-jp="私のデジタルホーム、あなたと私をつなぐ">
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+					<a href="https://huyang3780.top" class="link-underline text-primary" 
+					   data-cn="主站首页" data-en="Main Site Home" data-jp="メインサイトホーム">
+					   <i class="fa fa-home mr-1"></i>
+					</a>
+                    <a href="https://huyang3780.top/index.html#about" class="text-gray-400 hover:text-white transition-colors" data-cn="关于我" data-en="About Me" data-jp="自分について"></a>
+                    <a href="https://huyang3780.top/index.html#explore" class="text-gray-400 hover:text-white transition-colors" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る"></a>
+                    <a href="https://huyang3780.top/index.html#updates" class="text-gray-400 hover:text-white transition-colors" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報"></a>
+                    <a href="https://huyang3780.top/index.html#contact" class="text-gray-400 hover:text-white transition-colors" data-cn="联系我" data-en="Contact Me" data-jp="連絡先"></a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm"
+                    data-cn="© 2025 Jeffery Hu | 保留所有权利。"
+                    data-en="© 2025 Jeffery Hu | All rights reserved."
+                    data-jp="© 2025 Jeffery Hu | 全著作権所有。">
+                </p>
+                <div class="mt-4 md:mt-0">
+                    <select id="footer-language-selector" class="bg-gray-800 border border-gray-700 text-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入共用的JavaScript -->
+    <script src="src/js.js"></script>
+</body>
+</html>

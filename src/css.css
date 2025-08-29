@@ -1,0 +1,261 @@
+/* 基础样式 */
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 卡片悬停效果 */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* 网格背景 */
+.bg-grid {
+    background-image: radial-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* 区域淡入动画 */
+.section-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-fade.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 导航栏装饰线 */
+.nav-decoration {
+    background: linear-gradient(90deg, #3B82F6 0%, #EC4899 50%, #10B981 100%);
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 链接下划线动画 */
+.link-underline {
+    position: relative;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+    width: 100%;
+}
+
+/* 主站统一渐变背景 - 轻色系版本 */
+.index-bg-pattern {
+    background: linear-gradient(135deg, 
+        #00FFCC 0%,    /* 言和 - 薄荷绿 */
+        #39C5BB 25%,   /* 初音ミク - 苍绿色 */
+        #66CCFF 50%,   /* 洛天依 - 天蓝 */
+        #99CCFF 75%,   /* 星尘 - 蓝紫 */
+        #FFABBC 100%   /* IA - 淡粉 */
+    );
+    background-attachment: fixed;
+}
+
+/* 更新卡片样式调整 - 提高对比度 */
+.update-card {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+}
+
+/* 几何装饰元素 - 简化版 */
+.geometric-shapes::before,
+.geometric-shapes::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.05;
+}
+
+.geometric-shapes::before {
+    left: -150px;
+    top: 20%;
+    background: linear-gradient(135deg, #3B82F6 0%, transparent 70%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.geometric-shapes::after {
+    right: -150px;
+    bottom: 20%;
+    background: linear-gradient(135deg, #EC4899 0%, transparent 70%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* 文本框样式 */
+.text-box-softBlue {
+    background-color: #E1F5FE;
+    border: 1px solid #B3E5FC;
+    border-radius: 12px;
+}
+
+.text-box-softGreen {
+    background-color: #E8F5E9;
+    border: 1px solid #C8E6C9;
+    border-radius: 12px;
+}
+
+.text-box-softBeige {
+    background-color: #F5F5DC;
+    border: 1px solid #E6E6C9;
+    border-radius: 12px;
+}
+
+.text-box-softLavender {
+    background-color: #F3E5F5;
+    border: 1px solid #E1BEE7;
+    border-radius: 12px;
+}
+
+.text-box-softPink {
+    background-color: #FFEBEE;
+    border: 1px solid #FFCDD2;
+    border-radius: 12px;
+}
+
+.text-box-softGray {
+    background-color: #F5F7FA;
+    border: 1px solid #E0E6ED;
+    border-radius: 12px;
+}
+
+.update-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+
+/* 几何装饰元素 - 简化版 */
+.geometric-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.circle-1 {
+    width: 200px;
+    height: 200px;
+    background: #3B82F6;
+    top: 10%;
+    left: 5%;
+}
+
+.circle-2 {
+    width: 150px;
+    height: 150px;
+    background: #EC4899;
+    bottom: 15%;
+    right: 10%;
+}
+
+.geometric-square {
+    position: absolute;
+    opacity: 0.04;
+    z-index: 0;
+}
+
+.square-1 {
+    width: 120px;
+    height: 120px;
+    background: #10B981;
+    top: 20%;
+    right: 15%;
+    transform: rotate(45deg);
+}
+
+.square-2 {
+    width: 100px;
+    height: 100px;
+    background: #3B82F6;
+    bottom: 20%;
+    left: 10%;
+    transform: rotate(30deg);
+}
+
+/* 图片懒加载样式 */
+.lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+/* 加载占位符 */
+.image-placeholder {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .geometric-shapes::before,
+    .geometric-shapes::after {
+        opacity: 0.03;
+    }
+    
+    .geometric-circle,
+    .geometric-square {
+        opacity: 0.02;
+    }
+}
+
+/* 词组防换行 */
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* 防止其他重要短语被分割 */
+.no-break {
+    white-space: nowrap;
+    display: inline-block;
+}

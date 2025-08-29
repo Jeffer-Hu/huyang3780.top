@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:title" content="制作中 | Jeffery Hu">
+	<meta property="og:description" content="该页面正在制作中，敬请期待！">
+	<meta property="og:url" content="https://huyang3780.top">
+	<meta property="og:type" content="website">
+
+    <link rel="icon" href="pic/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="pic/icon.ico" type="image/x-icon">
+    
+    <title id="page-title" data-cn="制作中 | Jeffery Hu" data-en="In Progress | Jeffery Hu" data-jp="制作中 | Jeffery Hu"></title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#EC4899',
+                        wechat: '#07C160',
+                        weibo: '#E6162D',
+                        zhihu: '#0F88EB',
+                        qq: '#12B7F5',
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                        softBlue: '#E1F5FE',
+                        softGreen: '#E8F5E9',
+                        softBeige: '#F5F5DC',
+                        softPink: '#FFEBEE',
+                        softGray: '#F5F7FA',
+                        softLavender: '#F3E5F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+		
+		// 所有子域名和主域名统一设置为主域名，以同步语言设置
+		document.domain = 'huyang3780.top';
+    </script>
+    
+    <link rel="stylesheet" href="src/css.css">
+</head>
+<body class="index-bg-pattern text-dark overflow-x-hidden geometric-shapes">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm" id="navbar">
+        <div class="nav-decoration"></div>
+        
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="https://huyang3780.top" class="text-2xl font-bold flex items-center group mr-6">
+                    <span class="mr-2 text-primary group-hover:rotate-12 transition-transform duration-300"><i class="fa fa-connectdevelop"></i></span>
+                    <span>Jeffery Hu</span>
+                </a>
+                
+                <div class="hidden md:block">
+                    <select id="language-selector" class="bg-white border border-gray-300 text-dark rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+			
+			<nav class="hidden md:flex items-center space-x-6">
+				<a href="https://huyang3780.top/index.html#about" class="link-underline" data-cn="关于我" data-en="About Me" data-jp="自分について">关于我</a>
+				<a href="https://huyang3780.top/index.html#explore" class="link-underline" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る">探索内容</a>
+				<a href="https://huyang3780.top/index.html#updates" class="link-underline" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報">最新动态</a>
+				<a href="https://huyang3780.top/index.html#contact" class="link-underline" data-cn="联系我" data-en="Contact Me" data-jp="連絡先">联系我</a>
+			</nav>
+        </div>
+        
+        <div class="md:hidden bg-white shadow-2xl absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none" id="mobile-menu">
+			<div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+				<div class="mb-1">
+					<select id="mobile-language-selector" class="w-full bg-white border border-gray-300 text-dark rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+						<option value="cn" selected>中文</option>
+						<option value="en">English</option>
+						<option value="jp">日本語</option>
+					</select>
+				</div>
+				<a href="https://huyang3780.top/index.html#about" class="text-lg py-2 border-b border-gray-100" data-cn="关于我" data-en="About Me" data-jp="自分について"></a>
+				<a href="https://huyang3780.top/index.html#explore" class="text-lg py-2 border-b border-gray-100" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る"></a>
+				<a href="https://huyang3780.top/index.html#updates" class="text-lg py-2 border-b border-gray-100" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報"></a>
+				<a href="https://huyang3780.top/index.html#contact" class="text-lg py-2 border-b border-gray-100" data-cn="联系我" data-en="Contact Me" data-jp="連絡先"></a>
+			</div>
+		</div>
+    </header>
+
+	<section class="min-h-screen pt-24 relative overflow-hidden flex items-center">
+		<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+			<div class="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/30 blur-3xl"></div>
+			<div class="absolute bottom-20 right-40 w-80 h-80 rounded-full bg-accent/30 blur-3xl"></div>
+		</div>
+		
+		<div class="container mx-auto px-4 pt-12 pb-24 relative z-10">
+			<div class="max-w-3xl mx-auto text-center">
+				<div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+					<i class="fa fa-cog fa-spin text-4xl text-primary"></i>
+				</div>
+				
+				<h1 class="text-[clamp(2.5rem,8vw,4rem)] font-bold leading-tight mb-6" 
+					data-cn="页面制作中"
+					data-en="Page In Progress"
+					data-jp="ページ制作中">
+				</h1>
+				
+				<p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-10 max-w-2xl mx-auto" 
+					data-cn="抱歉，该页面正在紧张制作中，敬请期待！我们将尽快完成并上线。"
+					data-en="Sorry, this page is currently under development. Please stay tuned! We will complete and launch it as soon as possible."
+					data-jp="申し訳ありませんが、このページは現在開発中です。お待ちください！できるだけ早く完成して公開する予定です。">
+				</p>
+				
+				<div class="flex flex-wrap justify-center gap-4">
+					<a href="https://huyang3780.top/index.html" class="px-8 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1 transition-all"
+						data-cn="返回主页 <i class='fa fa-home ml-2'></i>"
+						data-en="Back to Home <i class='fa fa-home ml-2'></i>"
+						data-jp="ホームに戻る <i class='fa fa-home ml-2'></i>">
+					</a>
+					<a href="https://huyang3780.top/index.html#contact" class="px-8 py-3 bg-white text-dark rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all border border-gray-100"
+						data-cn="联系我们 <i class='fa fa-envelope ml-2'></i>"
+						data-en="Contact Us <i class='fa fa-envelope ml-2'></i>"
+						data-jp="お問い合わせ <i class='fa fa-envelope ml-2'></i>">
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="https://huyang3780.top" class="text-2xl font-bold flex items-center">
+                        <span class="mr-2 text-primary"><i class="fa fa-connectdevelop"></i></span>
+                        <span>Jeffery Hu</span>
+                    </a>
+                    <p class="text-gray-400 mt-2"
+                        data-cn="我的数字家园，连接你我"
+                        data-en="My digital home, connecting you and me"
+                        data-jp="私のデジタルホーム、あなたと私をつなぐ">
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+                    <a href="https://huyang3780.top/index.html#about" class="text-gray-400 hover:text-white transition-colors" data-cn="关于我" data-en="About Me" data-jp="自分について"></a>
+                    <a href="https://huyang3780.top/index.html#explore" class="text-gray-400 hover:text-white transition-colors" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る"></a>
+                    <a href="https://huyang3780.top/index.html#updates" class="text-gray-400 hover:text-white transition-colors" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報"></a>
+                    <a href="https://huyang3780.top/index.html#contact" class="text-gray-400 hover:text-white transition-colors" data-cn="联系我" data-en="Contact Me" data-jp="連絡先"></a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm"
+                    data-cn="© 2025 Jeffery Hu  |  保留所有权利。"
+                    data-en="© 2025 Jeffery Hu  |  All rights reserved."
+                    data-jp="© 2025 Jeffery Hu  |  全著作権所有。">
+                </p>
+                <div class="mt-4 md:mt-0">
+                    <select id="footer-language-selector" class="bg-gray-800 border border-gray-700 text-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/js.js"></script>
+</body>
+</html>

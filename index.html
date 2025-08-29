@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:title" content="Jeffery Hu | 个人网站">
+	<meta property="og:description" content="为何不在明天来临前多睡会儿呢？">
+	<!-- 水至清则无鱼，人至察则无徒！ -->
+	<meta property="og:url" content="https://huyang3780.top">
+	<meta property="og:type" content="website">
+
+    <link rel="icon" href="pic/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="pic/icon.ico" type="image/x-icon">
+    
+    <title id="page-title" data-cn="Jeffery Hu | 个人网站" data-en="Jeffery Hu | Personal Website" data-jp="Jeffery Hu | 個人ウェブサイト"></title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#EC4899',
+                        wechat: '#07C160',
+                        weibo: '#E6162D',
+                        zhihu: '#0F88EB',
+                        qq: '#12B7F5',
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                        softBlue: '#E1F5FE',
+                        softGreen: '#E8F5E9',
+                        softBeige: '#F5F5DC',
+                        softPink: '#FFEBEE',
+                        softGray: '#F5F7FA',
+                        softLavender: '#F3E5F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+		
+		// 所有子域名和主域名统一设置为主域名，以同步语言设置
+		document.domain = 'huyang3780.top';
+    </script>
+    
+    <link rel="stylesheet" href="src/css.css">
+</head>
+<body class="index-bg-pattern text-dark overflow-x-hidden geometric-shapes">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm" id="navbar">
+        <div class="nav-decoration"></div>
+        
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="https://huyang3780.top" class="text-2xl font-bold flex items-center group mr-6">
+                    <span class="mr-2 text-primary group-hover:rotate-12 transition-transform duration-300"><i class="fa fa-connectdevelop"></i></span>
+                    <span>Jeffery Hu</span>
+                </a>
+                
+                <div class="hidden md:block">
+                    <select id="language-selector" class="bg-white border border-gray-300 text-dark rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+			
+			<nav class="hidden md:flex items-center space-x-6">
+				<a href="#about" class="link-underline" data-cn="关于我" data-en="About Me" data-jp="自分について">关于我</a>
+				<a href="#explore" class="link-underline" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る">探索内容</a>
+				<a href="#updates" class="link-underline" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報">最新动态</a>
+				<a href="#contact" class="link-underline" data-cn="联系我" data-en="Contact Me" data-jp="連絡先">联系我</a>
+			</nav>
+        </div>
+        
+        <div class="md:hidden bg-white shadow-2xl absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none" id="mobile-menu">
+			<div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+				<div class="mb-1">
+					<select id="mobile-language-selector" class="w-full bg-white border border-gray-300 text-dark rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+						<option value="cn" selected>中文</option>
+						<option value="en">English</option>
+						<option value="jp">日本語</option>
+					</select>
+				</div>
+				<a href="#about" class="text-lg py-2 border-b border-gray-100" data-cn="关于我" data-en="About Me" data-jp="自分について"></a>
+				<a href="#explore" class="text-lg py-2 border-b border-gray-100" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る"></a>
+				<a href="#updates" class="text-lg py-2 border-b border-gray-100" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報"></a>
+				<a href="#contact" class="text-lg py-2 border-b border-gray-100" data-cn="联系我" data-en="Contact Me" data-jp="連絡先"></a>
+			</div>
+		</div>
+    </header>
+
+	<section class="min-h-screen pt-24 relative overflow-hidden flex items-center">
+		<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+			<div class="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary/30 blur-3xl"></div>
+			<div class="absolute bottom-20 right-40 w-80 h-80 rounded-full bg-accent/30 blur-3xl"></div>
+		</div>
+		
+		<div class="container mx-auto px-4 pt-12 pb-24 relative z-10">
+			<div class="max-w-3xl mx-auto text-left"> <!-- 改为左对齐 -->
+				<h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight mb-6" 
+					data-cn="欢迎来到<br><span class='bg-gradient-to-r from-primary to-accent text-gradient whitespace-nowrap'>Jeffery</span>的个人空间"
+					data-en="Welcome to<br><span class='bg-gradient-to-r from-primary to-accent text-gradient whitespace-nowrap'>Jeffery</span>'s <br>Personal Space"
+					data-jp="ようこそ<br><span class='bg-gradient-to-r from-primary to-accent text-gradient whitespace-nowrap'>Jeffery</span>の個人<br>スペース">
+				</h1>
+				<p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-8 max-w-2xl" 
+					data-cn="这里是我的数字家园，汇集了我的学习、工作与生活点滴。无论你是同学、老师、合作伙伴还是朋友，都能找到感兴趣的内容"
+					data-en="This is my digital home, gathering bits and pieces of my study, work and life. Whether you are a classmate, teacher, partner or friend, you can find interesting content"
+					data-jp="ここは私のデジタルホームで、学習、仕事、生活の点滴を集めています。同級生、先生、パートナー、友人のどれであっても、興味深いコンテンツを見つけることができます">
+				</p>
+				<div class="flex flex-wrap gap-4"> <!-- 移除justify-center，默认左对齐 -->
+					<a href="#explore" class="px-8 py-3 bg-primary text-white rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1 transition-all"
+						data-cn="开始探索 <i class='fa fa-compass ml-2'></i>"
+						data-en="Start Exploring <i class='fa fa-compass ml-2'></i>"
+						data-jp="探索を始める <i class='fa fa-compass ml-2'></i>">
+					</a>
+					<a href="#contact" class="px-8 py-3 bg-white text-dark rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all border border-gray-100"
+						data-cn="联系我 <i class='fa fa-envelope ml-2'></i>"
+						data-en="Contact Me <i class='fa fa-envelope ml-2'></i>"
+						data-jp="連絡する <i class='fa fa-envelope ml-2'></i>">
+					</a>
+				</div>
+			</div>
+			
+			<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce lg:bottom-10 sm:bottom-8">
+				<a href="#about" class="text-gray-400 hover:text-primary transition-colors">
+					<i class="fa fa-chevron-down text-2xl"></i>
+				</a>
+			</div>
+		</div>
+		
+		<div class="section-divider absolute bottom-0 left-0"></div>
+	</section>
+
+    <section id="about" class="py-20 relative overflow-hidden section-fade">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4"
+                    data-cn="关于我" data-en="About Me" data-jp="自分について">
+                </span>
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-6"
+                    data-cn="简单认识一下" data-en="A Brief Introduction" data-jp="簡単な紹介">
+                </h2>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl max-w-5xl mx-auto relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-10">
+                    <div class="w-full lg:w-1/3">
+                        <div class="relative">
+                            <img src="pic/personal_photo.jpg" alt="个人照片" class="w-full rounded-2xl shadow-lg">
+                            <div class="absolute -bottom-4 -right-4 bg-white p-3 rounded-full shadow-lg">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center text-white">
+                                    <i class="fa fa-user text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-2/3">
+                        <p class="text-gray-600 mb-6 leading-relaxed"
+                            data-cn="你好！我是Jeffery Hu，一个对世界充满好奇的探索者。在不同的角色中，我努力做到最好——无论是学习、工作还是生活。"
+                            data-en="Hello! I'm Jeffery Hu, an explorer curious about the world. I strive to do my best in different roles - whether it's study, work or life."
+                            data-jp="こんにちは！私はJeffery Huで、世界に好奇心を持つ探検家です。学習、仕事、生活など、さまざまな役割で最善を尽くしています。">
+                        </p>
+                        <p class="text-gray-600 mb-8 leading-relaxed"
+                            data-cn="这个网站是我与世界连接的窗口，记录了我的成长、思考和创造。欢迎通过各个板块了解更多，也期待与你建立联系。"
+                            data-en="This website is a window connecting me with the world, recording my growth, thoughts and creations. Welcome to learn more through various sections and look forward to connecting with you."
+                            data-jp="このウェブサイトは私と世界をつなぐ窓口で、成長、思考、創造を記録しています。各セクションを通じて詳細を知っていただき、皆さんとのつながりを楽しみにしています。">
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center text-box-softBlue px-4 py-2">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3">
+                                    <i class="fa fa-graduation-cap"></i>
+                                </div>
+                                <span data-cn="终身学习者" data-en="Lifelong Learner" data-jp="生涯学習者"></span>
+                            </div>
+                            <div class="flex items-center text-box-softGreen px-4 py-2">
+                                <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mr-3">
+                                    <i class="fa fa-cogs"></i>
+                                </div>
+                                <span data-cn="实践者" data-en="Practitioner" data-jp="実践者"></span>
+                            </div>
+                            <div class="flex items-center text-box-softPink px-4 py-2">
+                                <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-3">
+                                    <i class="fa fa-share-alt"></i>
+                                </div>
+                                <span data-cn="分享者" data-en="Sharer" data-jp="シェア者"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider absolute bottom-0 left-0"></div>
+    </section>
+
+    <section id="explore" class="py-20 relative overflow-hidden section-fade">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4"
+                    data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る">
+                </span>
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-6"
+                    data-cn="发现感兴趣的板块" data-en="Discover Interesting Sections" data-jp="興味深いセクションを発見">
+                </h2>
+                <p class="text-gray-600 text-lg"
+                    data-cn="这里有不同主题的内容集合，点击进入了解更多详情"
+                    data-en="There are collections of content on different topics, click to learn more details"
+                    data-jp="ここにはさまざまなトピックのコンテンツコレクションがあります。クリックして詳細をご覧ください">
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <a href="https://resource.huyang3780.top" class="block group">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softBlue">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="pic/study.jpg" alt="学习与研究" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <h3 class="text-xl font-bold text-white flex items-center"
+                                    data-cn="<i class='fa fa-flask mr-2'></i> 学习与研究"
+                                    data-en="<i class='fa fa-flask mr-2'></i> Study & Research"
+                                    data-jp="<i class='fa fa-flask mr-2'></i> 学習と研究">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4"
+                                data-cn="课程学习、研究项目、学术资料与思考"
+                                data-en="Course study, research projects, academic materials and thoughts"
+                                data-jp="コース学習、研究プロジェクト、学術資料と思考">
+                            </p>
+                            <div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+                                data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+                                data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+                                data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://portfolio.huyang3780.top" class="block group">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softGreen">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="pic/works.jpg" alt="作品与项目" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <h3 class="text-xl font-bold text-white flex items-center"
+                                    data-cn="<i class='fa fa-briefcase mr-2'></i> 作品与项目"
+                                    data-en="<i class='fa fa-briefcase mr-2'></i> Works & Projects"
+                                    data-jp="<i class='fa fa-briefcase mr-2'></i> 作品とプロジェクト">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4"
+                                data-cn="个人项目、作品集、实践成果展示"
+                                data-en="Personal projects, portfolio, practical achievements display"
+                                data-jp="個人プロジェクト、ポートフォリオ、実践成果展示">
+                            </p>
+                            <div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+                                data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+                                data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+                                data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://blog.huyang3780.top" class="block group">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softBeige">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="pic/daily.jpg" alt="日常与思考" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <h3 class="text-xl font-bold text-white flex items-center"
+                                    data-cn="<i class='fa fa-pencil mr-2'></i> 日常与思考"
+                                    data-en="<i class='fa fa-pencil mr-2'></i> Daily Life & Thoughts"
+                                    data-jp="<i class='fa fa-pencil mr-2'></i> 日常と思考">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4"
+                                data-cn="随笔、感悟、生活记录与思想分享"
+                                data-en="Essays, insights, life records and idea sharing"
+                                data-jp="随筆、感動、生活記録と思想共有">
+                            </p>
+                            <div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+                                data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+                                data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+                                data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://resource.huyang3780.top" class="block group">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softGray">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="pic/resources.jpg" alt="资源与工具" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <h3 class="text-xl font-bold text-white flex items-center"
+                                    data-cn="<i class='fa fa-wrench mr-2'></i> 资源与工具"
+                                    data-en="<i class='fa fa-wrench mr-2'></i> Resources & Tools"
+                                    data-jp="<i class='fa fa-wrench mr-2'></i> リソースとツール">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4"
+                                data-cn="实用资源、工具推荐、学习资料整理"
+                                data-en="Practical resources, tool recommendations, study materials organization"
+                                data-jp="実用的なリソース、ツール推奨、学習資料整理">
+                            </p>
+                            <div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+                                data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+                                data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+                                data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://cv.huyang3780.top" class="block group">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softPink">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="pic/experience.jpg" alt="简历与经历" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <h3 class="text-xl font-bold text-white flex items-center"
+                                    data-cn="<i class='fa fa-id-card mr-2'></i> 简历与经历"
+                                    data-en="<i class='fa fa-id-card mr-2'></i> Resume & Experiences"
+                                    data-jp="<i class='fa fa-id-card mr-2'></i> 履歴書と経験">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4"
+                                data-cn="个人经历、教育背景、技能与工作经验"
+                                data-en="Personal experiences, educational background, skills and work experience"
+                                data-jp="個人経験、学歴、スキルと職務経験">
+                            </p>
+                            <div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+                                data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+                                data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+                                data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://guestbook.huyang3780.top" class="block group">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softBlue">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="pic/interaction.jpg" alt="互动与留言" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <h3 class="text-xl font-bold text-white flex items-center"
+                                    data-cn="<i class='fa fa-comments mr-2'></i> 互动与留言"
+                                    data-en="<i class='fa fa-comments mr-2'></i> Interaction & Messages"
+                                    data-jp="<i class='fa fa-comments mr-2'></i> インタラクションとメッセージ">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4"
+                                data-cn="留言板、交流区、问题反馈与建议"
+                                data-en="Message board, communication area, problem feedback and suggestions"
+                                data-jp="メッセージボード、コミュニケーションエリア、問題フィードバックと提案">
+                            </p>
+                            <div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+                                data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+                                data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+                                data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+				<a href="https://studyplan.huyang3780.top" class="block group">
+					<div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softLavender">
+						<div class="h-48 overflow-hidden relative">
+							<img src="pic/studyplan.jpg" alt="留学计划与研究提案" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+							<div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+							<div class="absolute bottom-4 left-4 right-4">
+								<h3 class="text-xl font-bold text-white flex items-center"
+									data-cn="<i class='fa fa-plane mr-2'></i> 留学计划与研究提案"
+									data-en="<i class='fa fa-plane mr-2'></i> Study Abroad Plan & Research Proposal"
+									data-jp="<i class='fa fa-plane mr-2'></i> 留学計画と研究提案">
+								</h3>
+							</div>
+						</div>
+						<div class="p-6">
+							<p class="text-gray-600 mb-4"
+								data-cn="留学准备、研究方向、申请计划与学术提案"
+								data-en="Study abroad preparation, research direction, application plan and academic proposal"
+								data-jp="留学準備、研究方向、申請計画と学術提案">
+							</p>
+							<div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+								data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+								data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+								data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="https://skills.huyang3780.top" class="block group">
+					<div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softBlue">
+						<div class="h-48 overflow-hidden relative">
+							<img src="pic/skills.jpg" alt="技能与证书展示" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+							<div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+							<div class="absolute bottom-4 left-4 right-4">
+								<h3 class="text-xl font-bold text-white flex items-center"
+									data-cn="<i class='fa fa-certificate mr-2'></i> 技能与证书展示"
+									data-en="<i class='fa fa-certificate mr-2'></i> Skills & Certifications"
+									data-jp="<i class='fa fa-certificate mr-2'></i> スキルと資格証展示">
+								</h3>
+							</div>
+						</div>
+						<div class="p-6">
+							<p class="text-gray-600 mb-4"
+								data-cn="专业技能、语言能力、认证证书与获奖情况"
+								data-en="Professional skills, language proficiency, certifications and awards"
+								data-jp="専門スキル、語学力、認定証明書と受賞状況">
+							</p>
+							<div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+								data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+								data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+								data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="https://extracurricular.huyang3780.top" class="block group">
+					<div class="bg-white rounded-2xl overflow-hidden shadow-xl h-full card-hover text-box-softGreen">
+						<div class="h-48 overflow-hidden relative">
+							<img src="pic/extracurricular.jpg" alt="课外活动与社会经历" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+							<div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent"></div>
+							<div class="absolute bottom-4 left-4 right-4">
+								<h3 class="text-xl font-bold text-white flex items-center"
+									data-cn="<i class='fa fa-users mr-2'></i> 课外活动与社会经历"
+									data-en="<i class='fa fa-users mr-2'></i> Extracurricular Activities & Social Experiences"
+									data-jp="<i class='fa fa-users mr-2'></i> 課外活動と社会経験">
+								</h3>
+							</div>
+						</div>
+						<div class="p-6">
+							<p class="text-gray-600 mb-4"
+								data-cn="社团活动、志愿者经历、社会实践展示"
+								data-en="Club activities, volunteer experiences and social practices demonstrations"
+								data-jp="サークル活動、ボランティア経験、社会実践展示">
+							</p>
+							<div class="flex items-center text-primary font-medium group-hover:translate-x-2 transition-transform"
+								data-cn="进入板块 <i class='fa fa-arrow-right ml-2'></i>"
+								data-en="Enter Section <i class='fa fa-arrow-right ml-2'></i>"
+								data-jp="セクションに入る <i class='fa fa-arrow-right ml-2'></i>">
+							</div>
+						</div>
+					</div>
+				</a>
+
+			</div>
+        </div>
+        
+        <div class="section-divider absolute bottom-0 left-0"></div>
+    </section>
+
+    <section id="updates" class="py-20 section-fade">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4"
+                    data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報">
+                </span>
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-6"
+                    data-cn="近期更新" data-en="Recent Updates" data-jp="最近の更新">
+                </h2>
+                <p class="text-gray-600 text-lg"
+                    data-cn="了解最新的内容更新和活动信息"
+                    data-en="Learn about the latest content updates and event information"
+                    data-jp="最新のコンテンツ更新とイベント情報をご覧ください">
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-6">
+                    <div class="text-box-softBlue rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4 card-hover update-card">
+                        <div class="update-icon bg-primary/10 text-primary">
+                            <i class="fa fa-file-text-o text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fa fa-calendar-o mr-2"></i>
+                                <span data-cn="2025年8月" data-en="August 2025" data-jp="2025年8月"></span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2"
+                                data-cn="新的网页UI上线"
+                                data-en="The new web UI has been launched"
+                                data-jp="新しいUIが登場しました">
+                            </h3>
+                            <p class="text-gray-600"
+                                data-cn="将网站全面升级，停用了v1.5.0的个人网页，全新的v2.0.0网页已启用，增加了模块化分站与多语言选择框，适配中英日3国语言。"
+                                data-en="The website has been comprehensively upgraded. The personal web page of v1.5.0 has been discontinued, and the brand-new v2.0.0 web page has been activated. Modular sub-sites and multi-language selection boxes have been added, and it is compatible with Chinese, English and Japanese."
+                                data-jp="サイトを全面的にアップグレードしました。v1.5.0の箇人ページを停止しました。新しいv2.0.0のページが有効になりました。モジュール化されたサブサイトと多言語選択ボックスを追加しました。">
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-box-softBeige rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4 card-hover update-card">
+                        <div class="update-icon bg-accent/10 text-accent">
+                            <i class="fa fa-book text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fa fa-calendar-o mr-2"></i>
+                                <span data-cn="2025年7月" data-en="July 2025" data-jp="2025年7月"></span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2"
+                                data-cn="推荐书单更新"
+                                data-en="Recommended book list updated"
+                                data-jp="推奨図書リストが更新されました">
+                            </h3>
+                            <p class="text-gray-600"
+                                data-cn="新增10本专业相关书籍推荐，包含详细阅读笔记和心得。这些书籍涵盖了计算机科学、设计思维和个人成长等多个领域，每本都附有详细的阅读建议。"
+                                data-en="Added 10 new professional book recommendations, including detailed reading notes and insights. These books cover multiple fields such as computer science, design thinking and personal growth, each with detailed reading suggestions."
+                                data-jp="詳細な読書ノートと心得を含む、専門関連の新しい10冊の書籍推奨が追加されました。これらの書籍はコンピュータサイエンス、デザイン思考、個人成長など複数の分野をカバーしており、それぞれ詳細な読書提案が付属しています。">
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-box-softGreen rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4 card-hover update-card">
+                        <div class="update-icon bg-secondary/10 text-secondary">
+                            <i class="fa fa-code text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fa fa-calendar-o mr-2"></i>
+                                <span data-cn="2025年7月" data-en="July 2025" data-jp="2025年7月"></span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2"
+                                data-cn="个人网站更新"
+                                data-en="Personal website update"
+                                data-jp="個人サイトの更新">
+                            </h3>
+                            <p class="text-gray-600"
+                                data-cn="完成了v1.5.0的完善与上线。这些完善包括网页UI的更新，本地CSS与JS的预加载，交互式界面的优化等。"
+                                data-en="The improvement and launch of v1.5.0 have been completed. These improvements include the update of the web page UI, the preloading of local CSS and JS, and the optimization of the interactive interface, etc."
+                                data-jp="v1.5.0の改善とオンラインを完成しました。これらの改善には、web UIの更新、ネイティブCSSとJSのプリローディング、インタラクティブインタフェースの最適化などが含まれています。">
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="text-center mt-10">
+                    <a href="update.html" class="inline-flex items-center px-6 py-2 border border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-colors"
+                        data-cn="查看全部动态 <i class='fa fa-angle-right ml-2'></i>"
+                        data-en="View all updates <i class='fa fa-angle-right ml-2'></i>"
+                        data-jp="すべての更新を表示 <i class='fa fa-angle-right ml-2'></i>">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider absolute bottom-0 left-0"></div>
+    </section>
+
+    <section id="contact" class="py-20 relative overflow-hidden section-fade">
+        <div class="container mx-auto px-4 relative z-10">
+			<div class="text-center max-w-3xl mx-auto mb-16">
+				<span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4"
+					data-cn="联系我" data-en="Contact Me" data-jp="連絡先">
+				</span>
+				<h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-6"
+					data-cn="保持联系" data-en="Stay Connected" data-jp="つながりを保つ">
+				</h2>
+				<p class="text-gray-600 text-lg"
+					data-cn="无论您有任何问题或合作意向，都可以通过以下方式联系我"
+					data-en="Whether you have any questions or cooperation intentions, you can contact me through the following methods"
+					data-jp="ご質問や協力意向があれば、以下の方法でお問い合わせください">
+				</p>
+			</div>
+			
+			<div class="max-w-5xl mx-auto">
+				<!-- 移除发送消息卡片，只保留联系方式卡片并平铺显示 -->
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<!-- 联系方式卡片 -->
+					<div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
+						<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
+							<i class="fa fa-envelope text-2xl"></i>
+						</div>
+						<h3 class="text-xl font-bold mb-4"
+							data-cn="电子邮件" data-en="Email" data-jp="メール">
+						</h3>
+						<p class="text-gray-600 mb-6"
+							data-cn="随时发送邮件，我会尽快回复"
+							data-en="Send an email anytime, I will reply as soon as possible"
+							data-jp="いつでもメールを送ってください。できるだけ早く返信します">
+						</p>
+						<a href="mailto:contact@huyang3780.top" class="text-primary font-medium hover:underline flex items-center">
+							<span>contact@huyang3780.top</span>
+							<i class="fa fa-external-link ml-2"></i>
+						</a>
+					</div>
+					
+					<div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
+						<div class="w-14 h-14 rounded-full bg-wechat/10 flex items-center justify-center text-wechat mb-6">
+							<i class="fa fa-weixin text-2xl"></i>
+						</div>
+						<h3 class="text-xl font-bold mb-4"
+							data-cn="微信" data-en="WeChat" data-jp="WeChat">
+						</h3>
+						<p class="text-gray-600 mb-6"
+							data-cn="扫码添加我的微信"
+							data-en="Scan the code to add my WeChat"
+							data-jp="QRコードをスキャンしてWeChatを追加">
+						</p>
+						<div class="bg-gray-100 p-3 inline-block rounded-lg">
+							<img src="pic/wechat.png" alt="微信二维码" class="w-32 h-32 object-cover">
+						</div>
+					</div>
+					
+					<div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
+						<div class="w-14 h-14 rounded-full bg-qq/10 flex items-center justify-center text-qq mb-6">
+							<i class="fa fa-qq text-2xl"></i>
+						</div>
+						<h3 class="text-xl font-bold mb-4"
+							data-cn="QQ" data-en="QQ" data-jp="QQ">
+						</h3>
+						<p class="text-gray-600 mb-6"
+							data-cn="扫码添加我的QQ"
+							data-en="Scan the code to add my QQ"
+							data-jp="QRコードをスキャンしてQQを追加">
+						</p>
+						<div class="bg-gray-100 p-3 inline-block rounded-lg">
+							<img src="pic/qq.png" alt="QQ二维码" class="w-32 h-32 object-cover">
+						</div>
+					</div>
+				</div>
+				
+				<!-- 留言板跳转按钮 - 放置在联系方式卡片下方，作为主要互动入口 -->
+				<div class="mt-10 text-center">
+					<a href="https://guestbook.huyang3780.top" class="inline-flex items-center px-8 py-4 bg-primary text-white rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1 transition-all text-lg font-medium">
+						<i class="fa fa-comments mr-2"></i>
+						<span data-cn="访问留言板" data-en="Visit Guestbook" data-jp="ゲストブックを訪問"></span>
+					</a>
+					<p class="mt-4 text-gray-500"
+						data-cn="您可以在留言板直接评论和交流"
+						data-en="You can comment and communicate directly on the guestbook"
+						data-jp="ゲストブックで直接コメントと交流ができます">
+					</p>
+				</div>
+			</div>
+		</div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="https://huyang3780.top" class="text-2xl font-bold flex items-center">
+                        <span class="mr-2 text-primary"><i class="fa fa-connectdevelop"></i></span>
+                        <span>Jeffery Hu</span>
+                    </a>
+                    <p class="text-gray-400 mt-2"
+                        data-cn="我的数字家园，连接你我"
+                        data-en="My digital home, connecting you and me"
+                        data-jp="私のデジタルホーム、あなたと私をつなぐ">
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors" data-cn="关于我" data-en="About Me" data-jp="自分について"></a>
+                    <a href="#explore" class="text-gray-400 hover:text-white transition-colors" data-cn="探索内容" data-en="Explore Content" data-jp="コンテンツを探る"></a>
+                    <a href="#updates" class="text-gray-400 hover:text-white transition-colors" data-cn="最新动态" data-en="Latest Updates" data-jp="最新情報"></a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors" data-cn="联系我" data-en="Contact Me" data-jp="連絡先"></a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm"
+                    data-cn="© 2025 Jeffery Hu | 保留所有权利。"
+                    data-en="© 2025 Jeffery Hu | All rights reserved."
+                    data-jp="© 2025 Jeffery Hu | 全著作権所有。">
+                </p>
+                <div class="mt-4 md:mt-0">
+                    <select id="footer-language-selector" class="bg-gray-800 border border-gray-700 text-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
+                        <option value="cn" selected>中文</option>
+                        <option value="en">English</option>
+                        <option value="jp">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/js.js"></script>
+</body>
+</html>

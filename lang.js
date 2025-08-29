@@ -21,6 +21,35 @@ class CrossDomainLanguageSync {
             this.broadcastLanguage();
             this.isInitializing = false;
         }, 1000);
+
+        // 测试代码 - 可以添加到 lang.js 的 init 方法中
+        console.log('Testing cross-domain communication...');
+        
+        // 尝试向父窗口发送消息（如果存在）
+        if (window.parent !== window.self) {
+            try {
+                window.parent.postMessage({
+                    type: 'LANGUAGE_TEST',
+                    message: 'Testing connection from ' + window.location.hostname,
+                    timestamp: Date.now()
+                }, this.origin);
+            } catch (e) {
+                console.log('Cannot send message to parent:', e);
+            }
+        }
+        
+        // 尝试向 opener 发送消息（如果存在）
+        if (window.opener && !window.opener.closed) {
+            try {
+                window.opener.postMessage({
+                    type: 'LANGUAGE_TEST',
+                    message: 'Testing connection from ' + window.location.hostname,
+                    timestamp: Date.now()
+                }, this.origin);
+            } catch (e) {
+                console.log('Cannot send message to opener:', e);
+            }
+        }
     }
 
     setupLanguageSelectors() {
@@ -195,4 +224,5 @@ class CrossDomainLanguageSync {
 document.addEventListener('DOMContentLoaded', () => {
     window.languageSync = new CrossDomainLanguageSync();
 });
+
 

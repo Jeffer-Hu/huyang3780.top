@@ -19,36 +19,240 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3B82F6',
-                        secondary: '#10B981',
-                        accent: '#EC4899',
-                        wechat: '#07C160',
-                        weibo: '#E6162D',
-                        zhihu: '#0F88EB',
-                        qq: '#12B7F5',
-                        dark: '#1E293B',
-                        light: '#F8FAFC',
-                        softBlue: '#E1F5FE',
-                        softGreen: '#E8F5E9',
-                        softBeige: '#F5F5DC',
-                        softPink: '#FFEBEE',
-                        softGray: '#F5F7FA',
-                        softLavender: '#F3E5F5'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
-            }
-        }
-		
-		// 所有子域名和主域名统一设置为主域名，以同步语言设置
-		document.domain = 'huyang3780.top';
-    </script>
+	    tailwind.config = {
+	        theme: {
+	            extend: {
+	                colors: {
+	                    primary: '#3B82F6',
+	                    secondary: '#10B981',
+	                    accent: '#EC4899',
+	                    wechat: '#07C160',
+	                    weibo: '#E6162D',
+	                    zhihu: '#0F88EB',
+	                    qq: '#12B7F5',
+	                    dark: '#1E293B',
+	                    light: '#F8FAFC',
+	                    softBlue: '#E1F5FE',
+	                    softGreen: '#E8F5E9',
+	                    softBeige: '#F5F5DC',
+	                    softPink: '#FFEBEE',
+	                    softGray: '#F5F7FA',
+	                    softLavender: '#F3E5F5'
+	                },
+	                fontFamily: {
+	                    sans: ['Inter', 'system-ui', 'sans-serif'],
+	                },
+	            }
+	        }
+	    }
+	    
+	    // 跨子域语言同步功能 - 主站版本
+	    class CrossDomainLanguageSync {
+	        constructor() {
+	            this.origin = 'https://huyang3780.top';
+	            this.storageKey = 'preferredLanguage';
+	            this.availableLanguages = ['cn', 'en', 'jp'];
+	            this.currentLanguage = 'cn';
+	            this.isInitializing = true;
+	            
+	            // 初始化
+	            this.init();
+	        }
+	        
+	        init() {
+	            // 监听来自其他窗口的消息
+	            window.addEventListener('message', this.receiveMessage.bind(this));
+	            
+	            // 尝试从localStorage获取语言设置
+	            this.loadLanguage();
+	            
+	            // 设置语言选择器事件
+	            this.setupLanguageSelectors();
+	            
+	            // 广播当前语言设置到其他窗口
+	            setTimeout(() => {
+	                this.broadcastLanguage();
+	                this.isInitializing = false;
+	            }, 1000);
+	        }
+	        
+	        // 设置语言选择器
+	        setupLanguageSelectors() {
+	            const selectors = [
+	                document.getElementById('language-selector'),
+	                document.getElementById('mobile-language-selector'),
+	                document.getElementById('footer-language-selector')
+	            ].filter(selector => selector !== null);
+	            
+	            selectors.forEach(selector => {
+	                selector.value = this.currentLanguage;
+	                selector.addEventListener('change', (e) => {
+	                    this.changeLanguage(e.target.value);
+	                });
+	            });
+	        }
+	        
+	        // 接收来自其他窗口的消息
+	        receiveMessage(event) {
+	            // 验证消息来源
+	            if (event.origin !== this.origin) return;
+	            
+	            if (event.data && event.data.type === 'LANGUAGE_CHANGE') {
+	                const { language } = event.data;
+	                if (this.availableLanguages.includes(language) && language !== this.currentLanguage) {
+	                    console.log('Received language change:', language);
+	                    this.applyLanguage(language, false); // 不广播以避免循环
+	                }
+	            }
+	        }
+	        
+	        // 广播语言设置到所有子域
+	        broadcastLanguage() {
+	            // 发送消息到子框架（如果存在）
+	            if (window.frames && window.frames.length > 0) {
+	                for (let i = 0; i < window.frames.length; i++) {
+	                    try {
+	                        window.frames[i].postMessage({
+	                            type: 'LANGUAGE_CHANGE',
+	                            language: this.currentLanguage,
+	                            source: 'main'
+	                        }, this.origin);
+	                    } catch (e) {
+	                        console.log('无法向某些框架发送消息:', e);
+	                    }
+	                }
+	            }
+	            
+	            // 使用localStorage事件同步同一浏览器的其他标签页
+	            try {
+	                localStorage.setItem('lang_sync', JSON.stringify({
+	                    language: this.currentLanguage,
+	                    timestamp: Date.now(),
+	                    source: 'main'
+	                }));
+	            } catch (e) {
+	                console.error('localStorage写入错误:', e);
+	            }
+	        }
+	        
+	        // 加载语言设置
+	        loadLanguage() {
+	            try {
+	                const savedLang = localStorage.getItem(this.storageKey);
+	                if (savedLang && this.availableLanguages.includes(savedLang)) {
+	                    this.applyLanguage(savedLang, false);
+	                } else {
+	                    // 尝试根据浏览器语言自动检测
+	                    const browserLang = navigator.language.toLowerCase();
+	                    if (browserLang.startsWith('zh')) {
+	                        this.applyLanguage('cn', false);
+	                    } else if (browserLang.startsWith('ja')) {
+	                        this.applyLanguage('jp', false);
+	                    } else {
+	                        this.applyLanguage('en', false);
+	                    }
+	                }
+	            } catch (e) {
+	                console.error('读取语言设置失败:', e);
+	                this.applyLanguage('cn', false);
+	            }
+	        }
+	        
+	        // 更改语言
+	        changeLanguage(lang) {
+	            if (this.availableLanguages.includes(lang)) {
+	                this.applyLanguage(lang, true);
+	            }
+	        }
+	        
+	        // 应用语言设置
+	        applyLanguage(lang, broadcast = true) {
+	            if (this.currentLanguage === lang && !this.isInitializing) return;
+	            
+	            this.currentLanguage = lang;
+	            
+	            // 更新UI元素
+	            this.updateUI();
+	            
+	            // 保存到localStorage
+	            try {
+	                localStorage.setItem(this.storageKey, lang);
+	            } catch (e) {
+	                console.error('保存语言设置失败:', e);
+	            }
+	            
+	            // 更新语言选择器
+	            this.setupLanguageSelectors();
+	            
+	            // 广播语言更改
+	            if (broadcast) {
+	                this.broadcastLanguage();
+	            }
+	        }
+	        
+	        // 更新UI文本
+	        updateUI() {
+	            const lang = this.currentLanguage;
+	            const translatableElements = document.querySelectorAll('[data-cn], [data-en], [data-jp]');
+	            
+	            translatableElements.forEach(element => {
+	                if (element.hasAttribute(`data-${lang}`)) {
+	                    const newContent = element.getAttribute(`data-${lang}`);
+	                    if (newContent !== element.innerHTML) {
+	                        element.innerHTML = newContent;
+	                    }
+	                }
+	            });
+	            
+	            // 更新占位符
+	            const placeholderElements = document.querySelectorAll('[data-cn-placeholder], [data-en-placeholder], [data-jp-placeholder]');
+	            placeholderElements.forEach(element => {
+	                if (element.hasAttribute(`data-${lang}-placeholder`)) {
+	                    element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
+	                }
+	            });
+	            
+	            // 更新元数据和页面标题
+	            const ogTitle = document.querySelector('meta[property="og:title"]');
+	            const ogDesc = document.querySelector('meta[property="og:description"]');
+	            const pageTitle = document.getElementById('page-title');
+	            
+	            if (ogTitle && ogTitle.hasAttribute(`data-${lang}`)) {
+	                ogTitle.setAttribute('content', ogTitle.getAttribute(`data-${lang}`));
+	            }
+	            if (ogDesc && ogDesc.hasAttribute(`data-${lang}`)) {
+	                ogDesc.setAttribute('content', ogDesc.getAttribute(`data-${lang}`));
+	            }
+	            if (pageTitle && pageTitle.hasAttribute(`data-${lang}`)) {
+	                pageTitle.textContent = pageTitle.getAttribute(`data-${lang}`);
+	            }
+	            
+	            // 更新HTML语言属性
+	            document.documentElement.lang = lang === 'cn' ? 'zh-CN' : lang === 'jp' ? 'ja' : 'en';
+	            
+	            console.log(`Language changed to: ${lang}`);
+	        }
+	    }
+	
+	    // 初始化
+	    document.addEventListener('DOMContentLoaded', () => {
+	        const languageSync = new CrossDomainLanguageSync();
+	        
+	        // 监听localStorage变化（用于同一浏览器的标签页同步）
+	        window.addEventListener('storage', (e) => {
+	            if (e.key === 'lang_sync' && e.newValue) {
+	                try {
+	                    const data = JSON.parse(e.newValue);
+	                    if (data.language && data.source !== 'main') {
+	                        languageSync.applyLanguage(data.language, false);
+	                    }
+	                } catch (error) {
+	                    console.error('解析storage事件数据失败:', error);
+	                }
+	            }
+	        });
+	    });
+	</script>
     
     <link rel="stylesheet" href="src/css.css">
 </head>

@@ -1,5 +1,4 @@
-//<script src="path/to/language-sync.js"></script>
-// language-sync.js
+// lang.js
 class CrossDomainLanguageSync {
     constructor(options = {}) {
         this.origin = options.origin || 'https://huyang3780.top'; // 您的域名
@@ -196,3 +195,4 @@ class CrossDomainLanguageSync {
 document.addEventListener('DOMContentLoaded', () => {
     window.languageSync = new CrossDomainLanguageSync();
 });
+

@@ -2,15 +2,17 @@
 if (typeof CrossDomainLanguageSync === 'undefined') {
     class CrossDomainLanguageSync {
         constructor(options = {}) {
-            this.origin = options.origin || 'https://huyang3780.top';
+            // 配置选项
+            this.domain = options.domain || '.huyang3780.top'; // Cookie域名
+            this.cookieName = options.cookieName || 'preferred_language';
             this.storageKey = options.storageKey || 'preferredLanguage';
             this.availableLanguages = options.availableLanguages || ['cn', 'en', 'jp'];
+            this.cookieExpires = options.cookieExpires || 365; // Cookie有效期（天）
+            
+            // 状态变量
             this.currentLanguage = this.availableLanguages[0];
             this.isInitializing = true;
-            this.otherWindows = [];
-            this.messageQueue = [];
-            this.isConnected = false;
-
+            
             // 存储实例引用以便全局访问
             window.__languageSyncInstance = this;
             
@@ -20,80 +22,92 @@ if (typeof CrossDomainLanguageSync === 'undefined') {
         init() {
             console.log('Initializing CrossDomainLanguageSync...');
             
-            // 首先尝试从URL参数获取语言设置
+            // 按优先级获取语言设置
+            this.loadLanguage();
+            
+            // 设置语言选择器
+            this.setupLanguageSelectors();
+            
+            // 绑定事件
+            this.bindEvents();
+            
+            this.isInitializing = false;
+        }
+
+        // 获取当前语言（按优先级）
+        loadLanguage() {
+            // 1. 首先检查URL参数
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
             if (urlLang && this.availableLanguages.includes(urlLang)) {
-                this.applyLanguage(urlLang, false);
-            } else {
-                this.loadLanguage();
+                this.applyLanguage(urlLang, true);
+                return;
             }
             
-            this.setupLanguageSelectors();
-            this.bindEvents();
-
-            // 尝试建立连接
-            setTimeout(() => {
-                this.establishConnections();
-                this.isInitializing = false;
-            }, 1000);
-            
-            // 设置周期性连接检查
-            setInterval(() => {
-                this.checkConnections();
-            }, 5000);
-        }
-
-        establishConnections() {
-            console.log('Establishing connections...');
-            
-            // 尝试与父窗口通信
-            if (window.parent !== window.self) {
-                this.sendHandshake(window.parent);
+            // 2. 检查Cookie（跨子域同步）
+            const cookieLang = this.getCookie(this.cookieName);
+            if (cookieLang && this.availableLanguages.includes(cookieLang)) {
+                this.applyLanguage(cookieLang, true);
+                return;
             }
             
-            // 尝试与打开者窗口通信
-            if (window.opener && !window.opener.closed) {
-                this.sendHandshake(window.opener);
-            }
-            
-            // 尝试与所有iframe通信
-            const iframes = document.querySelectorAll('iframe');
-            iframes.forEach(iframe => {
-                try {
-                    this.sendHandshake(iframe.contentWindow);
-                } catch (e) {
-                    console.log('Cannot access iframe:', e);
-                }
-            });
-            
-            // 广播当前语言
-            this.broadcastLanguage();
-        }
-
-        sendHandshake(targetWindow) {
+            // 3. 检查localStorage（同域名同步）
             try {
-                targetWindow.postMessage({
-                    type: 'LANGUAGE_HANDSHAKE',
-                    source: window.location.hostname,
-                    language: this.currentLanguage,
-                    timestamp: Date.now()
-                }, this.origin);
-                
-                console.log('Handshake sent to:', targetWindow.location?.hostname || 'unknown');
+                const storedLang = localStorage.getItem(this.storageKey);
+                if (storedLang && this.availableLanguages.includes(storedLang)) {
+                    this.applyLanguage(storedLang, true);
+                    return;
+                }
             } catch (e) {
-                console.log('Cannot send handshake:', e);
+                console.error('LocalStorage access error:', e);
             }
+            
+            // 4. 根据浏览器语言自动检测
+            this.detectBrowserLanguage();
         }
 
-        checkConnections() {
-            if (!this.isConnected) {
-                console.log('No active connections, retrying...');
-                this.establishConnections();
+        // 检测浏览器语言
+        detectBrowserLanguage() {
+            const browserLang = navigator.language.toLowerCase();
+            let detectedLang = 'en'; // 默认英语
+            
+            if (browserLang.startsWith('zh')) {
+                detectedLang = 'cn';
+            } else if (browserLang.startsWith('ja')) {
+                detectedLang = 'jp';
             }
+            
+            this.applyLanguage(detectedLang, true);
         }
 
+        // 设置Cookie
+        setCookie(name, value, expiresDays, path = '/') {
+            const date = new Date();
+            date.setTime(date.getTime() + (expiresDays * 24 * 60 * 60 * 1000));
+            const expires = `expires=${date.toUTCString()}`;
+            document.cookie = `${name}=${value};${expires};domain=${this.domain};path=${path}`;
+        }
+
+        // 获取Cookie
+        getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // 删除Cookie
+        deleteCookie(name, path = '/') {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=${this.domain};path=${path}`;
+        }
+
+        // 设置语言选择器
         setupLanguageSelectors() {
+            // 为所有语言选择器设置事件监听
             const selectors = [
                 document.getElementById('language-selector'),
                 document.getElementById('mobile-language-selector'),
@@ -104,216 +118,75 @@ if (typeof CrossDomainLanguageSync === 'undefined') {
                 selector.value = this.currentLanguage;
                 selector.addEventListener('change', (e) => {
                     this.changeLanguage(e.target.value);
-                    
-                    // 更新URL参数以保持一致性
-                    this.updateUrlParameter('lang', e.target.value);
                 });
             });
         }
 
-        updateUrlParameter(key, value) {
-            const url = new URL(window.location);
-            url.searchParams.set(key, value);
-            window.history.replaceState({}, '', url);
-        }
-
+        // 绑定事件
         bindEvents() {
-            // 监听来自其他页面的消息
-            window.addEventListener('message', this.receiveMessage.bind(this));
-            
-            // 监听窗口获得焦点的事件
-            window.addEventListener('focus', () => {
-                this.syncOnFocus();
-            });
-
-            // 监听 localStorage 事件
+            // 监听localStorage变化（同域名页面同步）
             window.addEventListener('storage', (e) => {
-                if (e.key === this.storageKey && e.newValue) {
+                if (e.key === this.storageKey && e.newValue && 
+                    this.availableLanguages.includes(e.newValue) && 
+                    e.newValue !== this.currentLanguage) {
                     this.applyLanguage(e.newValue, false);
                 }
             });
-            
-            // 监听页面可见性变化
-            document.addEventListener('visibilitychange', () => {
-                if (!document.hidden) {
-                    this.syncOnFocus();
-                }
-            });
         }
 
-        receiveMessage(event) {
-            // 验证消息来源
-            if (event.origin !== this.origin) return;
-
-            const data = event.data;
-            if (!data || !data.type) return;
-
-            console.log('Received message:', data.type, 'from:', event.origin);
-
-            switch (data.type) {
-                case 'LANGUAGE_HANDSHAKE':
-                    this.isConnected = true;
-                    console.log('Handshake received from:', data.source);
-                    
-                    // 回复握手确认
-                    event.source.postMessage({
-                        type: 'LANGUAGE_HANDSHAKE_ACK',
-                        source: window.location.hostname,
-                        language: this.currentLanguage,
-                        timestamp: Date.now()
-                    }, this.origin);
-                    
-                    // 如果对方的语言不同，同步语言
-                    if (data.language && data.language !== this.currentLanguage) {
-                        this.applyLanguage(data.language, false);
-                    }
-                    break;
-                    
-                case 'LANGUAGE_HANDSHAKE_ACK':
-                    this.isConnected = true;
-                    console.log('Handshake acknowledged by:', data.source);
-                    
-                    // 如果对方的语言不同，同步语言
-                    if (data.language && data.language !== this.currentLanguage) {
-                        this.applyLanguage(data.language, false);
-                    }
-                    break;
-                    
-                case 'LANGUAGE_CHANGE':
-                    if (data.language && this.availableLanguages.includes(data.language)) {
-                        console.log('Language change received:', data.language);
-                        this.applyLanguage(data.language, false);
-                    }
-                    break;
-                    
-                case 'LANGUAGE_SYNC_REQUEST':
-                    // 收到同步请求，发送当前语言
-                    event.source.postMessage({
-                        type: 'LANGUAGE_SYNC_RESPONSE',
-                        source: window.location.hostname,
-                        language: this.currentLanguage,
-                        timestamp: Date.now()
-                    }, this.origin);
-                    break;
-                    
-                case 'LANGUAGE_SYNC_RESPONSE':
-                    // 收到同步响应，更新语言
-                    if (data.language && this.availableLanguages.includes(data.language)) {
-                        this.applyLanguage(data.language, false);
-                    }
-                    break;
-            }
-        }
-
-        syncOnFocus() {
-            console.log('Window focused, syncing language...');
-            
-            // 发送同步请求给所有可能的窗口
-            this.broadcastMessage({
-                type: 'LANGUAGE_SYNC_REQUEST',
-                source: window.location.hostname,
-                timestamp: Date.now()
-            });
-        }
-
-        broadcastMessage(message) {
-            const targets = [];
-            
-            // 父窗口
-            if (window.parent !== window.self) {
-                targets.push(window.parent);
-            }
-            
-            // 打开者窗口
-            if (window.opener && !window.opener.closed) {
-                targets.push(window.opener);
-            }
-            
-            // 所有iframe
-            const iframes = document.querySelectorAll('iframe');
-            iframes.forEach(iframe => {
-                try {
-                    targets.push(iframe.contentWindow);
-                } catch (e) {
-                    console.log('Cannot access iframe:', e);
-                }
-            });
-            
-            // 发送消息
-            targets.forEach(target => {
-                try {
-                    target.postMessage(message, this.origin);
-                } catch (e) {
-                    console.log('Cannot send message to target:', e);
-                }
-            });
-            
-            // 也使用localStorage进行同步
-            if (message.type === 'LANGUAGE_CHANGE' && message.language) {
-                try {
-                    localStorage.setItem(this.storageKey, message.language);
-                } catch (e) {
-                    console.error('LocalStorage set error:', e);
-                }
-            }
-        }
-
-        broadcastLanguage() {
-            this.broadcastMessage({
-                type: 'LANGUAGE_CHANGE',
-                language: this.currentLanguage,
-                source: window.location.hostname,
-                timestamp: Date.now()
-            });
-        }
-
-        loadLanguage() {
-            try {
-                // 首先尝试从 localStorage 读取
-                const savedLang = localStorage.getItem(this.storageKey);
-                if (savedLang && this.availableLanguages.includes(savedLang)) {
-                    this.applyLanguage(savedLang, false);
-                    return;
-                }
-            } catch (e) {
-                console.error('Read localStorage error:', e);
-            }
-
-            // 其次根据浏览器语言自动检测
-            const browserLang = navigator.language.toLowerCase();
-            if (browserLang.startsWith('zh')) {
-                this.applyLanguage('cn', false);
-            } else if (browserLang.startsWith('ja')) {
-                this.applyLanguage('jp', false);
-            } else {
-                this.applyLanguage('en', false);
-            }
-        }
-
+        // 更改语言
         changeLanguage(lang) {
             if (this.availableLanguages.includes(lang)) {
                 this.applyLanguage(lang, true);
+                
+                // 更新URL参数
+                this.updateUrlParameter('lang', lang);
             }
         }
 
-        applyLanguage(lang, broadcast = true) {
+        // 应用语言设置
+        applyLanguage(lang, persist = true) {
             if (this.currentLanguage === lang && !this.isInitializing) return;
-
-            console.log(`Applying language: ${lang}, broadcast: ${broadcast}`);
+            
+            console.log(`Applying language: ${lang}, persist: ${persist}`);
             this.currentLanguage = lang;
-
+            
+            // 更新UI
             this.updateUI();
+            
+            // 更新选择器
             this.setupLanguageSelectors();
-
-            if (broadcast) {
-                this.broadcastLanguage();
+            
+            if (persist) {
+                // 保存到localStorage（同域名同步）
+                try {
+                    localStorage.setItem(this.storageKey, lang);
+                } catch (e) {
+                    console.error('LocalStorage set error:', e);
+                }
+                
+                // 保存到Cookie（跨子域同步）
+                this.setCookie(this.cookieName, lang, this.cookieExpires);
             }
         }
 
+        // 更新URL参数
+        updateUrlParameter(key, value) {
+            const url = new URL(window.location);
+            if (value) {
+                url.searchParams.set(key, value);
+            } else {
+                url.searchParams.delete(key);
+            }
+            window.history.replaceState({}, '', url);
+        }
+
+        // 更新UI元素
         updateUI() {
             const lang = this.currentLanguage;
-            const translatableElements = document.querySelectorAll('[data-cn], [data-en], [data-jp]');
             
+            // 更新文本内容
+            const translatableElements = document.querySelectorAll('[data-cn], [data-en], [data-jp]');
             translatableElements.forEach(element => {
                 if (element.hasAttribute(`data-${lang}`)) {
                     const newContent = element.getAttribute(`data-${lang}`);
@@ -323,6 +196,7 @@ if (typeof CrossDomainLanguageSync === 'undefined') {
                 }
             });
             
+            // 更新placeholder
             const placeholderElements = document.querySelectorAll('[data-cn-placeholder], [data-en-placeholder], [data-jp-placeholder]');
             placeholderElements.forEach(element => {
                 if (element.hasAttribute(`data-${lang}-placeholder`)) {
@@ -330,6 +204,7 @@ if (typeof CrossDomainLanguageSync === 'undefined') {
                 }
             });
             
+            // 更新meta标签
             const ogTitle = document.querySelector('meta[property="og:title"]');
             const ogDesc = document.querySelector('meta[property="og:description"]');
             const pageTitle = document.getElementById('page-title');
@@ -344,31 +219,18 @@ if (typeof CrossDomainLanguageSync === 'undefined') {
                 pageTitle.textContent = pageTitle.getAttribute(`data-${lang}`);
             }
             
+            // 更新html lang属性
             document.documentElement.lang = lang === 'cn' ? 'zh-CN' : lang === 'jp' ? 'ja' : 'en';
             
             console.log(`UI updated to ${lang}`);
         }
-
-        addWindow(win) {
-            this.otherWindows.push(win);
-        }
     }
-}
 
-// 初始化
-if (typeof window.languageSync === 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.languageSync = new CrossDomainLanguageSync();
-        
-        // 添加全局函数以便调试
-        window.getLanguageSyncState = function() {
-            return {
-                currentLanguage: window.languageSync.currentLanguage,
-                isConnected: window.languageSync.isConnected,
-                origin: window.languageSync.origin
-            };
-        };
-        
-        console.log('Language sync initialized');
-    });
+    // 初始化
+    if (typeof window.languageSync === 'undefined') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.languageSync = new CrossDomainLanguageSync();
+            console.log('Language sync initialized with Cookie strategy');
+        });
+    }
 }
